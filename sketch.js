@@ -11,12 +11,16 @@ let sunX = 0;
 let fr = 30;
 let clr;
 
+let sketchStarted = false;
+
 var bubbles = [];
 
 function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES);
 
+  createButton("Start").mousePressed(startSketch);
+  
   mic = new p5.AudioIn()
   mic.start();
   
@@ -29,9 +33,18 @@ function setup() {
   
 }
 
+function startSketch(){
+  mic = new p5.AudioIn()
+  mic.start();
+  
+  sketchStarted = true;
+}
+
 function draw() { 
   
-  background(196, 229, 236);
+  if (sketchStarted){
+  
+    background(196, 229, 236);
   
   micLevel = mic.getLevel();
   
@@ -81,6 +94,8 @@ function draw() {
   drawRwhisker2();
 
   drawRwhisker3();
+  
+  }
   
   if (fishy == true){
     drawFishy();
